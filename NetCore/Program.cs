@@ -50,6 +50,9 @@ namespace NetCore
         {
             var entity = GetObject();
             var list = GetTasks();
+
+            var entityJson = JsonConvert.SerializeObject(entity);
+            var listJson = JsonConvert.SerializeObject(list);
             
             Console.WriteLine("Running benchmarks for .NET Core:");
 
@@ -62,6 +65,18 @@ namespace NetCore
             evaluateProblem("#2 Encoding (list of objects)", () => {
                 for(int i = 1; i <= 100000; ++i) {
                     var json = JsonConvert.SerializeObject(list);
+                }
+            });
+
+            evaluateProblem("#3 Decoding (single object)", () => {
+                for(int i = 1; i <= 100000; ++i) {
+                    var deserialized = JsonConvert.DeserializeObject<TaskDto>(entityJson);
+                }
+            });
+
+            evaluateProblem("#4 Decoding (list of objects)", () => {
+                for(int i = 1; i <= 100000; ++i) {
+                    var deserialized = JsonConvert.DeserializeObject<TaskDto[]>(listJson);
                 }
             });
         }

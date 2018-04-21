@@ -1,10 +1,10 @@
 import Foundation
 import Marshal
 
-class TaskClassDto: Marshaling {
+class TaskClassDto: Marshaling, Unmarshaling {
 
-    public var id: Foundation.UUID?
-    public var createDate: Date?
+    public var id: String?
+    public var createDate: String?
     public var name: String
     public var isFinished: Bool
 
@@ -16,16 +16,23 @@ class TaskClassDto: Marshaling {
     }
 
     init(id: Foundation.UUID, createDate: Date, name: String, isFinished: Bool) {
-        self.id = id
-        self.createDate = createDate
+        self.id = id.uuidString
+        self.createDate = createDate.description
         self.name = name
         self.isFinished = isFinished
     }
 
+    required init(object: MarshaledObject) throws {
+        id = try object.value(for: "id")
+        createDate = try object.value(for: "createDate")
+        name = try object.value(for: "name")
+        isFinished = try object.value(for: "isFinished")
+    }
+
     func marshaled() -> [String: Any] {
         return [
-            "id": id?.uuidString ?? "",
-            "createDate" : createDate?.description ?? "",
+            "id": id ?? "",
+            "createDate" : createDate ?? "",
             "name": name,
             "isFinished": isFinished
         ]

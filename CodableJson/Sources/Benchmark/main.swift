@@ -26,6 +26,9 @@ func getObject() -> TaskClassDto {
     return TaskClassDto(id: UUID(), createDate: Date(), name: "Task 1", isFinished: false)
 }
 
+var entityJson = TaskJson.getTaskJson()
+var listJson = TaskJson.getTasksJson()
+
 var entity = getObject()
 var list = getList()
 
@@ -34,6 +37,10 @@ print("Running benchmarks for SwiftJson:")
 // Encoding single object 100 000 times.
 evaluateProblem("#1 Encoding (single object)") {
     let encoder = JSONEncoder()
+    let formatter = DateFormatter()
+    formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+    encoder.dateEncodingStrategy = .formatted(formatter)
+
     do {
         for _ in 1...100_000 {
             _ = try encoder.encode(entity)
@@ -46,6 +53,10 @@ evaluateProblem("#1 Encoding (single object)") {
 // Encoding list of objects 100 000 times.
 evaluateProblem("#2 Encoding (list of objects)") {
     let encoder = JSONEncoder()
+    let formatter = DateFormatter()
+    formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+    encoder.dateEncodingStrategy = .formatted(formatter)
+
     do {
         for _ in 1...100_000 {
             _ = try encoder.encode(list)
@@ -54,3 +65,36 @@ evaluateProblem("#2 Encoding (list of objects)") {
         print("Error during serializable object to JSON")
     }
 }
+
+// Decoding single object 100 000 times.
+evaluateProblem("#3 Decoding (single object)") {
+    let decoder = JSONDecoder()
+    let formatter = DateFormatter()
+    formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+    decoder.dateDecodingStrategy = .formatted(formatter)
+
+    do {
+        for _ in 1...100_000 {
+            _ = try decoder.decode(TaskClassDto.self, from: entityJson)
+        }
+    } catch {
+        print("Error during serializable object to JSON: \(error)")
+    }
+}
+
+// Decoding list of objects 100 000 times.
+evaluateProblem("#4 Decoding (list of objects)") {
+    let decoder = JSONDecoder()
+    let formatter = DateFormatter()
+    formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+    decoder.dateDecodingStrategy = .formatted(formatter)
+
+    do {
+        for _ in 1...100_000 {
+            _ = try decoder.decode([TaskClassDto].self, from: listJson)
+        }
+    } catch {
+        print("Error during serializable object to JSON: \(error)")
+    }
+}
+

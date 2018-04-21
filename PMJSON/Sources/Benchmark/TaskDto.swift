@@ -1,6 +1,7 @@
 import Foundation
+import PMJSON
 
-class TaskClassDto: Codable {
+class TaskClassDto: Encodable {
 
     public var id: Foundation.UUID?
     public var createDate: Date?
@@ -12,6 +13,20 @@ class TaskClassDto: Codable {
         self.createDate = nil
         self.name = ""
         self.isFinished = false
+    }
+
+    init(json: JSON) throws {
+        if let idValue = try json.getStringOrNil("id") {
+            id = UUID(uuidString: idValue)
+        }
+        if let createDateValue = try json.getStringOrNil("createDate") {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+            createDate = formatter.date(from: createDateValue)
+        }
+
+        name = try json.getString("name")
+        isFinished = try json.getBool("isFinished")
     }
 
     init(id: Foundation.UUID, createDate: Date, name: String, isFinished: Bool) {

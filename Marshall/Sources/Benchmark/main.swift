@@ -39,6 +39,9 @@ func getDictionary() -> [Any] {
     return dict;
 }
 
+var entityJson = TaskJson.getTaskJson()
+var listJson = TaskJson.getTasksJson()
+
 var entity = getObject()
 var dictionary = getDictionary()
 
@@ -60,6 +63,32 @@ evaluateProblem("#2 Encoding (list of objects)") {
     do {
         for _ in 1...100_000 {
             _ = try JSONSerialization.data(withJSONObject: dictionary)
+        }
+    } catch {
+        print("Error during serializable object to JSON")
+    }
+}
+
+// Decoding single object 100 000 times.
+evaluateProblem("#3 Decoding (single object)") {
+    do {
+        for _ in 1...100_000 {
+            let json = try JSONSerialization.jsonObject(with: entityJson, options: []) as! MarshaledObject
+            _ = try TaskClassDto(object: json)
+        }
+    } catch {
+        print("Error during serializable object to JSON")
+    }
+}
+
+// Decoding list of objects 100 000 times.
+evaluateProblem("#4 Decoding (list of objects)") {
+    do {
+        for _ in 1...100_000 {
+            let json = try JSONSerialization.jsonObject(with: listJson, options: []) as! [MarshaledObject]
+            for item in json {
+                _ = try TaskClassDto(object: item)
+            }
         }
     } catch {
         print("Error during serializable object to JSON")

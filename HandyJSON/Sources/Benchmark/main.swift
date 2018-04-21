@@ -27,6 +27,9 @@ func getObject() -> TaskClassDto {
     return TaskClassDto(id: UUID(), createDate: Date(), name: "Task 1", isFinished: false)
 }
 
+var entityJson = TaskJson.getTaskJson()
+var listJson = TaskJson.getTasksJson()
+
 var entity = getObject()
 var list = getList()
 
@@ -43,5 +46,19 @@ evaluateProblem("#1 Encoding (single object)") {
 evaluateProblem("#2 Encoding (list of objects)") {
     for _ in 1...100_000 {
         _ = list.toJSONString()
+    }
+}
+
+// Decoding single object 100 000 times.
+evaluateProblem("#3 Decoding (single object)") {
+    for _ in 1...100_000 {
+        _ = TaskClassDto.deserialize(from: entityJson)
+    }
+}
+
+// Decoding list of objects 100 000 times.
+evaluateProblem("#4 Decoding (list of objects)") {
+    for _ in 1...100_000 {
+        _ = TaskClassDto.deserialize(from: listJson)
     }
 }

@@ -27,6 +27,9 @@ func getObject() -> TaskClassDto {
     return TaskClassDto(id: UUID(), createDate: Date(), name: "Task 1", isFinished: false)
 }
 
+var entityJson = TaskJson.getTaskJson()
+var listJson = TaskJson.getTasksJson()
+
 var entity = getObject()
 var list = getList()
 
@@ -52,6 +55,37 @@ evaluateProblem("#2 Encoding (list of objects)") {
     do {
         for _ in 1...100_000 {
             _ = try encoder.encodeAsJSON(list)
+        }
+    } catch {
+        print("Error during serializable object to JSON")
+    }
+}
+
+// Decoding single object 100 000 times.
+evaluateProblem("#3 Decoding (single object)") {
+    do {
+        for _ in 1...100_000 {
+            let json = try JSON.decode(entityJson)
+            _ = try TaskClassDto(json: json)
+        }
+    } catch {
+        print("Error during serializable object to JSON")
+    }
+}
+
+// Decoding list of objects 100 000 times.
+evaluateProblem("#4 Decoding (list of objects)") {
+    do {
+        for _ in 1...100_000 {
+            let json = try JSON.decode(listJson)
+            switch(json) {
+            case .array(let array):
+                for item in array {
+                    _ = try TaskClassDto(json: item)
+                }
+            default:
+                print("Error during serializable object to JSON")    
+            }
         }
     } catch {
         print("Error during serializable object to JSON")
