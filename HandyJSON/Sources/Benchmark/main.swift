@@ -17,14 +17,14 @@ func getList() -> [TaskClassDto] {
     let currentDate = Date()
     var list: [TaskClassDto] = []
     for i in 1...100 {
-        list.append(TaskClassDto(id: UUID(), createDate: currentDate, name: "Task \(i)", isFinished: false))
+        list.append(TaskClassDto(id: UUID().uuidString, createDate: currentDate, name: "Task \(i)", isFinished: false))
     }
 
     return list
 }
 
 func getObject() -> TaskClassDto {
-    return TaskClassDto(id: UUID(), createDate: Date(), name: "Task 1", isFinished: false)
+    return TaskClassDto(id: UUID().uuidString, createDate: Date(), name: "Task 1", isFinished: false)
 }
 
 var entityJson = TaskJson.getTaskJson()
@@ -35,30 +35,30 @@ var list = getList()
 
 print("Running benchmarks for HandyJSON:")
 
-// Encoding single object 100 000 times.
+// Encoding single object 10,000 times.
 evaluateProblem("#1 Encoding (single object)") {
-    for _ in 1...100_000 {
+    for _ in 1...10_000 {
         _ = entity.toJSONString()
     }
 }
 
-// Encoding list of objects 100 000 times.
+// Encoding list of objects 10,000 times.
 evaluateProblem("#2 Encoding (list of objects)") {
-    for _ in 1...100_000 {
+    for _ in 1...10_000 {
         _ = list.toJSONString()
     }
 }
 
-// Decoding single object 100 000 times.
+// Decoding single object 10,000 times.
 evaluateProblem("#3 Decoding (single object)") {
-    for _ in 1...100_000 {
+    for _ in 1...10_000 {
         _ = TaskClassDto.deserialize(from: entityJson)
     }
 }
 
-// Decoding list of objects 100 000 times.
+// Decoding list of objects 10,000 times.
 evaluateProblem("#4 Decoding (list of objects)") {
-    for _ in 1...100_000 {
-        _ = TaskClassDto.deserialize(from: listJson)
+    for _ in 1...10_000 {
+        _ = [TaskClassDto].deserialize(from: listJson)
     }
 }

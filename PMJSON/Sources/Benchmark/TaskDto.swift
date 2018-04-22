@@ -3,7 +3,7 @@ import PMJSON
 
 class TaskClassDto: Encodable {
 
-    public var id: Foundation.UUID?
+    public var id: String?
     public var createDate: Date?
     public var name: String
     public var isFinished: Bool
@@ -16,20 +16,18 @@ class TaskClassDto: Encodable {
     }
 
     init(json: JSON) throws {
-        if let idValue = try json.getStringOrNil("id") {
-            id = UUID(uuidString: idValue)
-        }
+
+        id = try json.getStringOrNil("id")
+
         if let createDateValue = try json.getStringOrNil("createDate") {
-            let formatter = DateFormatter()
-            formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-            createDate = formatter.date(from: createDateValue)
+            createDate = DateHelper.fromISO8601String(createDateValue)
         }
 
         name = try json.getString("name")
         isFinished = try json.getBool("isFinished")
     }
 
-    init(id: Foundation.UUID, createDate: Date, name: String, isFinished: Bool) {
+    init(id: String, createDate: Date, name: String, isFinished: Bool) {
         self.id = id
         self.createDate = createDate
         self.name = name

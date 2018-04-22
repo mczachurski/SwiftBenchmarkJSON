@@ -13,7 +13,7 @@ namespace NetCore
             {
                 list.Add(new TaskDto
                 {
-                    Id = Guid.NewGuid(),
+                    Id = Guid.NewGuid().ToString(),
                     CreateDate = DateTime.Now,
                     Name = $"Task {i}",
                     IsFinished = false
@@ -27,7 +27,7 @@ namespace NetCore
         {
             return new TaskDto
             {
-                Id = Guid.NewGuid(),
+                Id = Guid.NewGuid().ToString(),
                 CreateDate = DateTime.Now,
                 Name = $"Task 1",
                 IsFinished = false
@@ -57,25 +57,25 @@ namespace NetCore
             Console.WriteLine("Running benchmarks for .NET Core:");
 
             evaluateProblem("#1 Encoding (single object)", () => {
-                for(int i = 1; i <= 100000; ++i) {
+                for(int i = 1; i <= 10000; ++i) {
                     var json = JsonConvert.SerializeObject(entity);
                 }
             });
 
             evaluateProblem("#2 Encoding (list of objects)", () => {
-                for(int i = 1; i <= 100000; ++i) {
+                for(int i = 1; i <= 10000; ++i) {
                     var json = JsonConvert.SerializeObject(list);
                 }
             });
 
             evaluateProblem("#3 Decoding (single object)", () => {
-                for(int i = 1; i <= 100000; ++i) {
+                for(int i = 1; i <= 10000; ++i) {
                     var deserialized = JsonConvert.DeserializeObject<TaskDto>(entityJson);
                 }
             });
 
             evaluateProblem("#4 Decoding (list of objects)", () => {
-                for(int i = 1; i <= 100000; ++i) {
+                for(int i = 1; i <= 10000; ++i) {
                     var deserialized = JsonConvert.DeserializeObject<TaskDto[]>(listJson);
                 }
             });

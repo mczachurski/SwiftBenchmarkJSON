@@ -4,7 +4,7 @@ import Marshal
 class TaskClassDto: Marshaling, Unmarshaling {
 
     public var id: String?
-    public var createDate: String?
+    public var createDate: Date?
     public var name: String
     public var isFinished: Bool
 
@@ -15,9 +15,9 @@ class TaskClassDto: Marshaling, Unmarshaling {
         self.isFinished = false
     }
 
-    init(id: Foundation.UUID, createDate: Date, name: String, isFinished: Bool) {
-        self.id = id.uuidString
-        self.createDate = createDate.description
+    init(id: String, createDate: Date, name: String, isFinished: Bool) {
+        self.id = id
+        self.createDate = createDate
         self.name = name
         self.isFinished = isFinished
     }
@@ -32,7 +32,7 @@ class TaskClassDto: Marshaling, Unmarshaling {
     func marshaled() -> [String: Any] {
         return [
             "id": id ?? "",
-            "createDate" : createDate ?? "",
+            "createDate" : DateHelper.toISO8601String(createDate) ?? "",
             "name": name,
             "isFinished": isFinished
         ]

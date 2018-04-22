@@ -50,90 +50,90 @@ var listData = try! list.serializedData()
 
 print("Running benchmarks for SwiftProtobuf:")
 
-// Encoding single object 100 000 times.
+// Encoding single object 10,000 times.
 evaluateProblem("#1 (JSON) Encoding (single object)") {
     do {
-        for _ in 1...100_000 {
+        for _ in 1...10_000 {
             _ = try object.jsonString()
         }
     } catch {
-        print("Error during serializable object to JSON")
+        print("Error during serialization object to JSON: \(error)")
     }
 }
 
-// Encoding single object 100 000 times.
+// Encoding single object 10,000 times.
 evaluateProblem("#1 (Binary) Encoding (single object)") {
     do {
-        for _ in 1...100_000 {
+        for _ in 1...10_000 {
             _ = try object.serializedData()
         }
     } catch {
-        print("Error during serializable object to JSON")
+        print("Error during serialization object to JSON: \(error)")
     }
 }
 
-// Encoding list of objects 100 000 times (JSON).
+// Encoding list of objects 10,000 times (JSON).
 evaluateProblem("#2 (JSON) Encoding (list of objects)") {
     do {
-        for _ in 1...100_000 {
+        for _ in 1...10_000 {
             _ = try list.jsonString()
         }
     } catch {
-        print("Error during serializable object to JSON")
+        print("Error during serialization object to JSON: \(error)")
     }
 }
 
-// Encoding list of objects 100 000 times (binary).
+// Encoding list of objects 10,000 times (binary).
 evaluateProblem("#2 (Binary) Encoding (list of objects)") {
     do {
-        for _ in 1...100_000 {
+        for _ in 1...10_000 {
             _ = try list.serializedData()
         }
     } catch {
-        print("Error during serializable object to JSON")
+        print("Error during serialization object to JSON: \(error)")
     }
 }
 
-// Decoding single object 100 000 times.
+// Decoding single object 10,000 times.
 evaluateProblem("#3 (JSON) Decoding (single object)") {
     do {
-        for _ in 1...100_000 {
+        for _ in 1...10_000 {
             _ = try Task(jsonString: objectJson)
         }
     } catch {
-        print("Error during serializable object to JSON: \(error)")
+        print("Error during deserialization object from JSON: \(error)")
     }
 }
 
-// Decoding single object 100 000 times.
+// Decoding single object 10,000 times.
 evaluateProblem("#3 (Binary) Decoding (single object)") {
     do {
-        for _ in 1...100_000 {
+        for _ in 1...10_000 {
             _ = try Task(serializedData: objectData)
         }
     } catch {
-        print("Error during serializable object to JSON: \(error)")
+        print("Error during deserialization object from JSON: \(error)")
     }
 }
 
-// Decoding list of objects 100 000 times (JSON).
+// Decoding list of objects 10,000 times (JSON).
 evaluateProblem("#4 (JSON) Decoding (list of objects)") {
     do {
-        for _ in 1...100_000 {
+        for _ in 1...10_000 {
             _ = try Tasks(jsonString: listJson)
         }
     } catch {
-        print("Error during serializable object to JSON")
+        print("Error during deserialization object from JSON: \(error)")
     }
 }
 
-// Decoding list of objects 100 000 times (binary).
+// Decoding list of objects 10,000 times (binary).
 evaluateProblem("#4 (Binary) Decoding (list of objects)") {
     do {
-        for _ in 1...100_000 {
+        for _ in 1...10_000 {
             _ = try Tasks(serializedData: listData)
         }
     } catch {
-        print("Error during serializable object to JSON")
+        print("Error during deserialization object from JSON: \(error)")
     }
 }

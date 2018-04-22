@@ -3,7 +3,7 @@ import ObjectMapper
 
 class TaskClassDto: Mappable {
 
-    public var id: Foundation.UUID?
+    public var id: String?
     public var createDate: Date?
     public var name: String
     public var isFinished: Bool
@@ -29,7 +29,7 @@ class TaskClassDto: Mappable {
         self.isFinished     <- map["isFinished"]
     }
 
-    init(id: Foundation.UUID, createDate: Date, name: String, isFinished: Bool) {
+    init(id: String, createDate: Date, name: String, isFinished: Bool) {
         self.id = id
         self.createDate = createDate
         self.name = name
