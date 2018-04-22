@@ -51,7 +51,7 @@ Below there are links to all benchmarked frameworks.
 Benchmarks of algorithms which transform object(s) to the corresponding JSON string. Object has structure like on following snipper.
 
 ```swift
-class TaskDto: Codable {
+class TaskDto {
     public var id: String?
     public var createDate: Date?
     public var name: String
@@ -128,7 +128,7 @@ do {
 
 ## Decoding (deserialization)
 
-Benchmarks of algorithms which transform JSON to the corresponding object(s). Returned JSON should looks like on below snippet.
+Benchmarks of algorithms which transform JSON to the corresponding object(s). JSON which is parsed looks like on below snippet.
 
 ```json
 {
@@ -204,3 +204,7 @@ Simple implementation with Swift Codable protocol.
 | CodableJson   | 77.687       | 72.703       | 73.567       | **74.652**        | 6                   |
 | SwiftProtobuf | 2.361        | 2.369        | 2.389        | **2.373**         | 1 :1st_place_medal: |
 | NetCore       | 2,378        | 2,369        | 2,354        | **2.367**         | -                   |
+
+## Contributing
+
+If you would like to add another framework for comparison, submit a pull request. Add folder with new benchmark implementation (we have separate application for each framework). Add new framework to `build.sh` and `run.sh` scripts.
