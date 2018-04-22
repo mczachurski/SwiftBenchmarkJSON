@@ -9,6 +9,13 @@ All benchmark was performed on my computer:
  - Memory: 16 GB 1867 MHz LPDDR3
  - Graphics: Intel Iris Graphics 540 1536  MB
 
+Swift version:
+
+```bash
+Apple Swift version 4.1 (swiftlang-902.0.48 clang-902.0.37.1)
+Target: x86_64-apple-darwin17.5.0
+```
+
 Here you can find other benchmark: [https://github.com/bwhiteley/JSONShootout](https://github.com/bwhiteley/JSONShootout)
 
 ## Build & Run benchmarks
