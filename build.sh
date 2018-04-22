@@ -12,7 +12,7 @@ swift build --configuration release
 cd ../PMJSON
 swift build --configuration release
 
-cd ../CodableJson
+cd ../Codable
 swift build --configuration release
 
 cd ../SwiftProtobuf

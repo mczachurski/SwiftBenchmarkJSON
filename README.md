@@ -1,6 +1,6 @@
 # Swift JSON Benchmarks
 
-Benchmark results for different Swift frameworks which work on JSON (encoding/decoding). For reference there is also a benchmark of .NET Core framework (Newtonsoft.JSON).
+Benchmark results for different Swift frameworks which work on JSON (encoding/decoding). For reference there is also a benchmark of .NET Core framework (Newtonsoft.JSON), however it's not included in ranks.
 
 All benchmark was performed on my computer:
 
@@ -45,6 +45,8 @@ Below there are links to all benchmarked frameworks.
  - [ObjectMapper](https://github.com/Hearst-DD/ObjectMapper)
  - [PMJSON](https://github.com/postmates/PMJSON)
  - [SwiftProtobuf](https://github.com/apple/swift-protobuf.git)
+ - Codable - is built in Swift encoding & decoding based on Codable protocol
+ - NetCore - is .NET Core implementation of JSON decoding/encoding (Newtonsoft.JSON framework)
 
 ## Encoding (serialization)
 
@@ -88,7 +90,7 @@ do {
 | Marshall      | 0.099        | 0.099        | 0.099        | **0.099**         | 3 :3rd_place_medal: |
 | ObjectMapper  | 0.264        | 0.259        | 0.254        | **0.259**         | 4                   |
 | PMJSON        | 0.051        | 0.051        | 0.050        | **0.051**         | 2 :2nd_place_medal: |
-| CodableJson   | 0.304        | 0.301        | 0.303        | **0.303**         | 5                   |
+| Codable       | 0.304        | 0.301        | 0.303        | **0.303**         | 5                   |
 | SwiftProtobuf | 0.044        | 0.043        | 0.042        | **0.043**         | 1 :1st_place_medal: |
 | NetCore       | 0.027        | 0.027        | 0.026        | **0.027**         | -                   |
 
@@ -122,7 +124,7 @@ do {
 | Marshall      | 4.669        | 4.633        | 4.635        | **4.646**         | 2 :2nd_place_medal: |
 | ObjectMapper  | 15.632       | 15.821       | 15.615       | **15.689**        | 4                   |
 | PMJSON        | 4.730        | 4.726        | 4.749        | **4.73**          | 3 :3rd_place_medal: |
-| CodableJson   | 19.584       | 19.373       | 19.344       | **19.43**         | 5                   |
+| Codable       | 19.584       | 19.373       | 19.344       | **19.43**         | 5                   |
 | SwiftProtobuf | 4.161        | 4.176        | 4.263        | **4.200**         | 1 :1st_place_medal: |
 | NetCore       | 1.785        | 1.790        | 1,787        | **1.787**         | -                   |
 
@@ -168,7 +170,7 @@ Simple implementation with Swift Codable protocol.
 | Marshall      | 0.562        | 0.560        | 0.566        | **0.563**         | 5                   |
 | ObjectMapper  | 0.217        | 0.217        | 0.220        | **0.218**         | 2 :2nd_place_medal: |
 | PMJSON        | 0.438        | 0.433        | 0.431        | **0.434**         | 4                   |
-| CodableJson   | 0.795        | 0.782        | 0.788        | **0.788**         | 6                   |
+| Codable       | 0.795        | 0.782        | 0.788        | **0.788**         | 6                   |
 | SwiftProtobuf | 0.049        | 0.047        | 0.049        | **0.048**         | 1 :1st_place_medal: |
 | NetCore       | 0,100        | 0,101        | 0,101        | **0.101**         | -                   |
 
@@ -201,7 +203,7 @@ Simple implementation with Swift Codable protocol.
 | Marshall      | 49.990       | 51.086       | 49.885       | **50.320**        | 5                   |
 | ObjectMapper  | 14.330       | 14.475       | 14.170       | **14.325**        | 2 :2nd_place_medal: |
 | PMJSON        | 39.526       | 39.724       | 39.513       | **39.588**        | 4                   |
-| CodableJson   | 77.687       | 72.703       | 73.567       | **74.652**        | 6                   |
+| Codable       | 77.687       | 72.703       | 73.567       | **74.652**        | 6                   |
 | SwiftProtobuf | 2.361        | 2.369        | 2.389        | **2.373**         | 1 :1st_place_medal: |
 | NetCore       | 2,378        | 2,369        | 2,354        | **2.367**         | -                   |
 

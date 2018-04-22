@@ -1,0 +1,86 @@
+{
+	"type": "serial",
+	"categoryField": "category",
+	"startDuration": 1,
+	"theme": "default",
+	"categoryAxis": {
+		"gridPosition": "start"
+	},
+	"trendLines": [],
+	"graphs": [
+		{
+			"balloonText": "[[title]] of [[category]]:[[value]]",
+			"fillAlphas": 1,
+			"id": "AmGraph-1",
+			"title": "Encoding list",
+			"type": "column",
+			"valueField": "column-1"
+		},
+		{
+			"balloonText": "[[title]] of [[category]]:[[value]]",
+			"fillAlphas": 1,
+			"id": "AmGraph-3",
+			"title": "Decoding list",
+			"type": "column",
+			"valueField": "column-3"
+		}
+	],
+	"guides": [],
+	"valueAxes": [
+		{
+			"id": "ValueAxis-1",
+			"stackType": "regular",
+			"title": "Time (sec)"
+		}
+	],
+	"allLabels": [],
+	"balloon": {},
+	"legend": {
+		"enabled": true,
+		"useGraphSettings": true
+	},
+	"titles": [
+		{
+			"id": "Title-1",
+			"size": 15,
+			"text": "Decoding & Encoding list of objects (10,000 times)"
+		}
+	],
+	"dataProvider": [
+		{
+			"category": "HandyJSON",
+			"column-1": "100.175",
+			"column-3": "22.619"
+		},
+		{
+			"category": "Marshall",
+			"column-1": "4.646",
+			"column-3": "50.320"
+		},
+		{
+			"category": "ObjectMapper",
+			"column-1": "15.689",
+			"column-3": "14.325"
+		},
+		{
+			"category": "PMJSON",
+			"column-1": "4.73",
+			"column-3": "39.588"
+		},
+		{
+			"category": "Codable",
+			"column-1": "19.43",
+			"column-3": "74.652"
+		},
+		{
+			"category": "SwiftProtobuf",
+			"column-1": "4.200",
+			"column-3": "2.373"
+		},
+		{
+			"category": "NetCore",
+			"column-1": "1.787",
+			"column-3": "2.367"
+		}
+	]
+}

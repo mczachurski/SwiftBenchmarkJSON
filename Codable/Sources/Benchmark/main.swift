@@ -32,7 +32,7 @@ var listJson = TaskJson.getTasksJson()
 var entity = getObject()
 var list = getList()
 
-print("Running benchmarks for CodableJson:")
+print("Running benchmarks for Codable:")
 
 // Encoding single object 10,000 times.
 evaluateProblem("#1 Encoding (single object)") {
