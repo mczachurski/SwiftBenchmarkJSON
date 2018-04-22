@@ -48,11 +48,39 @@ Below there are links to all benchmarked frameworks.
 
 ## Encoding (serialization)
 
-Benchmarks of algorithms which transform object(s) to the corresponding JSON string.
+Benchmarks of algorithms which transform object(s) to the corresponding JSON string. Object has structure like on following snipper.
+
+```swift
+class TaskDto: Codable {
+    public var id: String?
+    public var createDate: Date?
+    public var name: String
+    public var isFinished: Bool
+}
+```
 
 ### Benchmark #1 - Encoding single object
 
-In this benchmark we are encoding 10,000 times single object.
+In this benchmark we are encoding 10,000 times single object. 
+
+**Code**
+
+Simple implementation with Swift Codable protocol looks like below.
+
+```swift
+let encoder = JSONEncoder()
+let entity = TaskDto(id: UUID().uuidString, createDate: Date(), name: "Task 1", isFinished: false)
+
+do {
+    for _ in 1...10_000 {
+        _ = try encoder.encode(entity)
+    }
+} catch {
+    print("Error during serialization object to JSON: \(error)")
+}
+```
+
+**Results**
 
 | Framework     | Run #1 (sec) | Run #2 (sec) | Run #3 (sec) | **Average (sec)** | Ranking             |
 |---------------|--------------|--------------|--------------|-------------------|---------------------|
@@ -67,7 +95,26 @@ In this benchmark we are encoding 10,000 times single object.
 
 ### Benchmark #2 - Encoding list of objects
 
-In this benchmark we are encoding 10,000 times list of 100 objects.
+In this benchmark we are encoding 10,000 times list of 100 objects. 
+
+**Code**
+
+Implementation with Swift Codable protocol looks like on below snippet.
+
+```swift
+let encoder = JSONEncoder()
+let list = getListOfTasks() // Returns array of 100 tasks
+
+do {
+    for _ in 1...10_000 {
+        _ = try encoder.encode(list)
+    }
+} catch {
+    print("Error during serialization object to JSON: \(error)")
+}
+```
+
+**Results**
 
 | Framework     | Run #1 (sec) | Run #2 (sec) | Run #3 (sec) | **Average (sec)** | Ranking             |
 |---------------|--------------|--------------|--------------|-------------------|---------------------|
@@ -81,11 +128,39 @@ In this benchmark we are encoding 10,000 times list of 100 objects.
 
 ## Decoding (deserialization)
 
-Benchmarks of algorithms which transform JSON to the corresponding object(s).
+Benchmarks of algorithms which transform JSON to the corresponding object(s). Returned JSON should looks like on below snippet.
+
+```json
+{
+    "id": "e24e39c2-7b96-4a16-8cb6-bb96239171e5",
+    "createDate": "2009-02-15T00:00:00Z",
+    "name": "Task 1",
+    "isFinished": false
+}
+```
 
 ### Benchmark #3 - Decoding single object
 
 In this benchmark we are decoding 10,000 times JSON file which represent single object.
+
+**Code**
+
+Simple implementation with Swift Codable protocol.
+
+```swift
+    let decoder = JSONDecoder()
+    let jsonData = getJsonData() // Returns Data object (with single JSON object)
+
+    do {
+        for _ in 1...10_000 {
+            _ = try decoder.decode(TaskClassDto.self, from: jsonData)
+        }
+    } catch {
+        print("Error during deserialization object from JSON: \(error)")
+    }
+```
+
+**Results**
 
 | Framework     | Run #1 (sec) | Run #2 (sec) | Run #3 (sec) | **Average (sec)** | Ranking             |
 |---------------|--------------|--------------|--------------|-------------------|---------------------|
@@ -100,6 +175,25 @@ In this benchmark we are decoding 10,000 times JSON file which represent single 
 ### Benchmark #4 - Decoding list of objects
 
 In this benchmark we are decoding 10,000 times JSON file which represent 100 objects.
+
+**Code**
+
+Simple implementation with Swift Codable protocol.
+
+```swift
+    let decoder = JSONDecoder()
+    let jsonListData = getJsonListData() // Returns Data object (with list of JSON objects)
+
+    do {
+        for _ in 1...10_000 {
+            _ = try decoder.decode([TaskClassDto].self, from: jsonListData)
+        }
+    } catch {
+        print("Error during deserialization object from JSON: \(error)")
+    }
+```
+
+**Results**
 
 | Framework     | Run #1 (sec) | Run #2 (sec) | Run #3 (sec) | **Average (sec)** | Ranking             |
 |---------------|--------------|--------------|--------------|-------------------|---------------------|
