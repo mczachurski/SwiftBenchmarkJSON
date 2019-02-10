@@ -4,7 +4,7 @@ import HandyJSON
 class TaskClassDto: HandyJSON {
 
     public var id: String?
-    public var createDate: Date?
+    public var createDate: String?
     public var name: String
     public var isFinished: Bool
 
@@ -15,7 +15,7 @@ class TaskClassDto: HandyJSON {
         self.isFinished = false
     }
 
-    init(id: String, createDate: Date, name: String, isFinished: Bool) {
+    init(id: String, createDate: String, name: String, isFinished: Bool) {
         self.id = id
         self.createDate = createDate
         self.name = name

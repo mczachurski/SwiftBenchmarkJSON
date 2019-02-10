@@ -14,7 +14,7 @@ namespace NetCore
                 list.Add(new TaskDto
                 {
                     Id = Guid.NewGuid().ToString(),
-                    CreateDate = DateTime.Now,
+                    CreateDate = DateTime.Now.ToString(),
                     Name = $"Task {i}",
                     IsFinished = false
                 });
@@ -28,7 +28,7 @@ namespace NetCore
             return new TaskDto
             {
                 Id = Guid.NewGuid().ToString(),
-                CreateDate = DateTime.Now,
+                CreateDate = DateTime.Now.ToString(),
                 Name = $"Task 1",
                 IsFinished = false
             };

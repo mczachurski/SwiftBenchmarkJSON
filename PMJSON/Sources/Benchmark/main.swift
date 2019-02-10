@@ -14,7 +14,7 @@ func evaluateProblem(_ name: String, method: () -> Void) {
 }
 
 func getList() -> [TaskClassDto] {
-    let currentDate = Date()
+    let currentDate = Date().description
     var list: [TaskClassDto] = []
     for i in 1...100 {
         list.append(TaskClassDto(id: UUID().uuidString, createDate: currentDate, name: "Task \(i)", isFinished: false))
@@ -24,7 +24,7 @@ func getList() -> [TaskClassDto] {
 }
 
 func getObject() -> TaskClassDto {
-    return TaskClassDto(id: UUID().uuidString, createDate: Date(), name: "Task 1", isFinished: false)
+    return TaskClassDto(id: UUID().uuidString, createDate: Date().description, name: "Task 1", isFinished: false)
 }
 
 var entityJson = TaskJson.getTaskJson()
