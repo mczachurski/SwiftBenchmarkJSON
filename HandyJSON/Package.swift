@@ -6,7 +6,7 @@ import PackageDescription
 let package = Package(
     name: "Benchmark",
     dependencies: [
-        .package(url: "https://github.com/alibaba/HandyJSON.git", from: "4.1.1")
+        .package(url: "https://github.com/alibaba/HandyJSON.git", from: "4.1.3")
     ],
     targets: [
         .target(name: "Benchmark", dependencies: ["HandyJSON"]),

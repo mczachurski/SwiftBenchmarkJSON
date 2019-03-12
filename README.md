@@ -65,6 +65,9 @@ class TaskDto {
     public var createDate: Date?
     public var name: String
     public var isFinished: Bool
+    public var subtasks: Int
+    public var weight: Decimal
+    public var children: [String]?
 }
 ```
 

@@ -17,14 +17,32 @@ func getList() -> [TaskClassDto] {
     let currentDate = Date()
     var list: [TaskClassDto] = []
     for i in 1...100 {
-        list.append(TaskClassDto(id: UUID().uuidString, createDate: currentDate, name: "Task \(i)", isFinished: false))
+        list.append(
+            TaskClassDto(
+                id: UUID().uuidString,
+                createDate: currentDate,
+                name: "Task \(i)",
+                isFinished: false,
+                subtasks: 212,
+                weight: 3.14,
+                children: ["taska", "taskb", "taskc"]
+            )
+        )
     }
 
     return list
 }
 
 func getObject() -> TaskClassDto {
-    return TaskClassDto(id: UUID().uuidString, createDate: Date(), name: "Task 1", isFinished: false)
+    return TaskClassDto(
+        id: UUID().uuidString,
+        createDate: Date(),
+        name: "Task 1",
+        isFinished: false,
+        subtasks: 212,
+        weight: 3.14,
+        children: ["taska", "taskb", "taskc"]
+    )
 }
 
 var entityJson = TaskJson.getTaskJson()
@@ -37,11 +55,12 @@ print("Running benchmarks for PMJSON:")
 
 // Encoding single object 10,000 times.
 evaluateProblem("#1 Encoding (single object)") {
-    let encoder = JSON.Encoder()
+    var encoder = JSON.Encoder()
+    encoder.dateEncodingStrategy = .iso8601
 
     do {
         for _ in 1...10_000 {
-            _ = try encoder.encodeAsJSON(entity)
+            _ = try encoder.encodeAsString(entity)
         }
     } catch {
         print("Error during serialization object to JSON: \(error)")
@@ -50,11 +69,12 @@ evaluateProblem("#1 Encoding (single object)") {
 
 // Encoding list of objects 10,000 times.
 evaluateProblem("#2 Encoding (list of objects)") {
-    let encoder = JSON.Encoder()
+    var encoder = JSON.Encoder()
+    encoder.dateEncodingStrategy = .iso8601
 
     do {
         for _ in 1...10_000 {
-            _ = try encoder.encodeAsJSON(list)
+            _ = try encoder.encodeAsString(list)
         }
     } catch {
         print("Error during serialization object to JSON: \(error)")
@@ -63,10 +83,12 @@ evaluateProblem("#2 Encoding (list of objects)") {
 
 // Decoding single object 10,000 times.
 evaluateProblem("#3 Decoding (single object)") {
+    var decoder = JSON.Decoder()
+    decoder.dateDecodingStrategy = .iso8601
+
     do {
         for _ in 1...10_000 {
-            let json = try JSON.decode(entityJson)
-            _ = try TaskClassDto(json: json)
+            _ = try decoder.decode(TaskClassDto.self, from: entityJson)
         }
     } catch {
         print("Error during deserialization object from JSON: \(error)")
@@ -75,17 +97,12 @@ evaluateProblem("#3 Decoding (single object)") {
 
 // Decoding list of objects 10,000 times.
 evaluateProblem("#4 Decoding (list of objects)") {
+    var decoder = JSON.Decoder()
+    decoder.dateDecodingStrategy = .iso8601
+
     do {
         for _ in 1...10_000 {
-            let json = try JSON.decode(listJson)
-            switch(json) {
-            case .array(let array):
-                for item in array {
-                    _ = try TaskClassDto(json: item)
-                }
-            default:
-                print("Not correct type!") 
-            }
+            _ = try decoder.decode([TaskClassDto].self, from: listJson)
         }
     } catch {
         print("Error during deserialization object from JSON: \(error)")

@@ -17,14 +17,32 @@ func getList() -> [TaskClassDto] {
     let currentDate = Date()
     var list: [TaskClassDto] = []
     for i in 1...100 {
-        list.append(TaskClassDto(id: UUID().uuidString, createDate: currentDate, name: "Task \(i)", isFinished: false))
+        list.append(
+            TaskClassDto(
+                id: UUID().uuidString,
+                createDate: currentDate,
+                name: "Task \(i)",
+                isFinished: false,
+                subtasks: 212,
+                weight: 3.14,
+                children: ["taska", "taskb", "taskc"]
+            )
+        )
     }
 
     return list
 }
 
 func getObject() -> TaskClassDto {
-    return TaskClassDto(id: UUID().uuidString, createDate: Date(), name: "Task 1", isFinished: false)
+    return TaskClassDto(
+        id: UUID().uuidString,
+        createDate: Date(),
+        name: "Task 1",
+        isFinished: false,
+        subtasks: 212,
+        weight: 3.14,
+        children: ["taska", "taskb", "taskc"]
+    )
 }
 
 var entityJson = TaskJson.getTaskJson()
@@ -46,7 +64,7 @@ evaluateProblem("#1 Encoding (single object)") {
 evaluateProblem("#2 Encoding (list of objects)") {
     for _ in 1...10_000 {
         _ = list.toJSONString()
-    }   
+    }
 }
 
 // Decoding single object 10,000 times.
@@ -60,5 +78,5 @@ evaluateProblem("#3 Decoding (single object)") {
 evaluateProblem("#4 Decoding (list of objects)") {
     for _ in 1...10_000 {
         _ = Mapper<TaskClassDto>().mapArray(JSONString: listJson)
-    }   
+    }
 }

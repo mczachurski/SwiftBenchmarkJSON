@@ -16,7 +16,10 @@ namespace NetCore
                     Id = Guid.NewGuid().ToString(),
                     CreateDate = DateTime.Now,
                     Name = $"Task {i}",
-                    IsFinished = false
+                    IsFinished = false,
+                    Subtasks = 212,
+                    Weight = 3.14,
+                    Children = new string[] { "taska", "taskb", "taskc" }
                 });
             }
 
@@ -30,7 +33,10 @@ namespace NetCore
                 Id = Guid.NewGuid().ToString(),
                 CreateDate = DateTime.Now,
                 Name = $"Task 1",
-                IsFinished = false
+                IsFinished = false,
+                Subtasks = 212,
+                Weight = 3.14,
+                Children = new string[] { "taska", "taskb", "taskc" }
             };
         }
 
@@ -58,25 +64,25 @@ namespace NetCore
 
             evaluateProblem("#1 Encoding (single object)", () => {
                 for(int i = 1; i <= 10000; ++i) {
-                    var json = JsonConvert.SerializeObject(entity);
+                    JsonConvert.SerializeObject(entity);
                 }
             });
 
             evaluateProblem("#2 Encoding (list of objects)", () => {
                 for(int i = 1; i <= 10000; ++i) {
-                    var json = JsonConvert.SerializeObject(list);
+                    JsonConvert.SerializeObject(list);
                 }
             });
 
             evaluateProblem("#3 Decoding (single object)", () => {
                 for(int i = 1; i <= 10000; ++i) {
-                    var deserialized = JsonConvert.DeserializeObject<TaskDto>(entityJson);
+                    JsonConvert.DeserializeObject<TaskDto>(entityJson);
                 }
             });
 
             evaluateProblem("#4 Decoding (list of objects)", () => {
                 for(int i = 1; i <= 10000; ++i) {
-                    var deserialized = JsonConvert.DeserializeObject<TaskDto[]>(listJson);
+                    JsonConvert.DeserializeObject<TaskDto[]>(listJson);
                 }
             });
         }

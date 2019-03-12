@@ -6,7 +6,7 @@ import PackageDescription
 let package = Package(
     name: "Benchmark",
     dependencies: [
-        .package(url: "https://github.com/Hearst-DD/ObjectMapper.git", from: "3.1.0")
+        .package(url: "https://github.com/Hearst-DD/ObjectMapper.git", from: "3.4.2")
     ],
     targets: [
         .target(name: "Benchmark", dependencies: ["ObjectMapper"]),

@@ -17,14 +17,32 @@ func getList() -> [TaskClassDto] {
     let currentDate = Date()
     var list: [TaskClassDto] = []
     for i in 1...100 {
-        list.append(TaskClassDto(id: UUID().uuidString, createDate: currentDate, name: "Task \(i)", isFinished: false))
+        list.append(
+            TaskClassDto(
+                id: UUID().uuidString,
+                createDate: currentDate,
+                name: "Task \(i)",
+                isFinished: false,
+                subtasks: 212,
+                weight: 3.14,
+                children: ["taska", "taskb", "taskc"]
+            )
+        )
     }
 
     return list
 }
 
 func getObject() -> TaskClassDto {
-    return TaskClassDto(id: UUID().uuidString, createDate: Date(), name: "Task 1", isFinished: false)
+    return TaskClassDto(
+        id: UUID().uuidString,
+        createDate: Date(),
+        name: "Task 1",
+        isFinished: false,
+        subtasks: 212,
+        weight: 3.14,
+        children: ["taska", "taskb", "taskc"]
+    )
 }
 
 var entityJson = TaskJson.getTaskJson()

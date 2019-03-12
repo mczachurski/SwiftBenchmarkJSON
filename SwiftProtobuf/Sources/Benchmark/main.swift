@@ -1,4 +1,5 @@
 import Foundation
+import SwiftProtobuf
 
 func evaluateProblem(_ name: String, method: () -> Void) {
 
@@ -19,9 +20,12 @@ func getList() -> Tasks {
 
         var task = Task()
         task.id = UUID().uuidString
-        task.createDate = Date().description
+        task.createDate = SwiftProtobuf.Google_Protobuf_Timestamp(date: Date())
         task.name = "Task \(i)"
         task.isFinished = false
+        task.subtasks = 212
+        task.weight = 3.14
+        task.children = ["taska", "taskb", "taskc"]
 
         tasks.tasks.append(task)
     }
@@ -33,9 +37,12 @@ func getObject() -> Task {
 
     var task = Task()
     task.id = UUID().uuidString
-    task.createDate = Date().description
+    task.createDate = SwiftProtobuf.Google_Protobuf_Timestamp(date: Date())
     task.name = "Task 1"
     task.isFinished = false
+    task.subtasks = 212
+    task.weight = 3.14
+    task.children = ["taska", "taskb", "taskc"]
 
     return task
 }
