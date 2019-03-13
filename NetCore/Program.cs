@@ -19,7 +19,10 @@ namespace NetCore
                     IsFinished = false,
                     Subtasks = 212,
                     Weight = 3.14,
-                    Children = new string[] { "taska", "taskb", "taskc" }
+                    Children = new string[] { "taska", "taskb", "taskc" },
+                    Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eget sem erat. Quisque dictum tellus in feugiat facilisis. Vivamus porttitor vel arcu id cursus. Cras interdum massa ac rhoncus ornare. Sed quis massa felis. Curabitur blandit tempor enim, vitae euismod nibh tincidunt a. Duis faucibus dapibus purus nec dictum. Suspendisse dignissim sapien et consequat lobortis.",
+                    Deadline = DateTime.Now,
+                    Tags = new string[] { "tag1", "tag2", "tag3", "tag4", "tag5" }
                 });
             }
 
@@ -36,7 +39,10 @@ namespace NetCore
                 IsFinished = false,
                 Subtasks = 212,
                 Weight = 3.14,
-                Children = new string[] { "taska", "taskb", "taskc" }
+                Children = new string[] { "taska", "taskb", "taskc" },
+                Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eget sem erat. Quisque dictum tellus in feugiat facilisis. Vivamus porttitor vel arcu id cursus. Cras interdum massa ac rhoncus ornare. Sed quis massa felis. Curabitur blandit tempor enim, vitae euismod nibh tincidunt a. Duis faucibus dapibus purus nec dictum. Suspendisse dignissim sapien et consequat lobortis.",
+                Deadline = DateTime.Now,
+                Tags = new string[] { "tag1", "tag2", "tag3", "tag4", "tag5" }
             };
         }
 

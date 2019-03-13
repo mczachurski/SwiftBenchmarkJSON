@@ -10,6 +10,9 @@ class TaskClassDto: Marshaling, Unmarshaling {
     public var subtasks: Int
     public var weight: Double
     public var children: [String]?
+    public var description: String?
+    public var deadline: Date?
+    public var tags: [String]?
 
     required init() {
         self.id = nil
@@ -19,9 +22,23 @@ class TaskClassDto: Marshaling, Unmarshaling {
         self.subtasks = 0
         self.weight = 1.0
         self.children = nil
+        self.description = ""
+        self.deadline = nil
+        self.tags = nil
     }
 
-    init(id: String, createDate: Date, name: String, isFinished: Bool, subtasks: Int, weight: Double, children: [String]) {
+    init(
+        id: String,
+        createDate: Date,
+        name: String,
+        isFinished: Bool,
+        subtasks: Int,
+        weight: Double,
+        children: [String],
+        description: String?,
+        deadline: Date?,
+        tags: [String]?
+    ) {
         self.id = id
         self.createDate = createDate
         self.name = name
@@ -29,6 +46,9 @@ class TaskClassDto: Marshaling, Unmarshaling {
         self.subtasks = subtasks
         self.weight = weight
         self.children = children
+        self.description = description
+        self.deadline = deadline
+        self.tags = tags
     }
 
     required init(object: MarshaledObject) throws {
@@ -39,6 +59,9 @@ class TaskClassDto: Marshaling, Unmarshaling {
         subtasks = try object.value(for: "subtasks")
         weight = try object.value(for: "weight")
         children = try object.value(for: "children")
+        description = try object.value(for: "description")
+        deadline = try object.value(for: "deadline")
+        tags = try object.value(for: "tags")
     }
 
     func marshaled() -> [String: Any?] {
@@ -49,7 +72,10 @@ class TaskClassDto: Marshaling, Unmarshaling {
             "isFinished": isFinished,
             "subtasks": subtasks,
             "weight": weight,
-            "children": children
+            "children": children,
+            "description": description,
+            "deadline": DateHelper.toISO8601String(deadline),
+            "tags": tags
         ]
     }
 }

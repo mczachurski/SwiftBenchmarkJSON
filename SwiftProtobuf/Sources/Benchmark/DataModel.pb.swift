@@ -75,6 +75,25 @@ struct Task {
     set {_uniqueStorage()._children = newValue}
   }
 
+  var description_p: String {
+    get {return _storage._description_p}
+    set {_uniqueStorage()._description_p = newValue}
+  }
+
+  var deadline: SwiftProtobuf.Google_Protobuf_Timestamp {
+    get {return _storage._deadline ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
+    set {_uniqueStorage()._deadline = newValue}
+  }
+  /// Returns true if `deadline` has been explicitly set.
+  var hasDeadline: Bool {return _storage._deadline != nil}
+  /// Clears the value of `deadline`. Subsequent reads from it will return its default value.
+  mutating func clearDeadline() {_uniqueStorage()._deadline = nil}
+
+  var tags: [String] {
+    get {return _storage._tags}
+    set {_uniqueStorage()._tags = newValue}
+  }
+
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
@@ -123,6 +142,9 @@ extension Task: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase,
     5: .same(proto: "subtasks"),
     6: .same(proto: "weight"),
     7: .same(proto: "children"),
+    8: .same(proto: "description"),
+    9: .same(proto: "deadline"),
+    10: .same(proto: "tags"),
   ]
 
   fileprivate class _StorageClass {
@@ -133,6 +155,9 @@ extension Task: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase,
     var _subtasks: Int32 = 0
     var _weight: Double = 0
     var _children: [String] = []
+    var _description_p: String = String()
+    var _deadline: SwiftProtobuf.Google_Protobuf_Timestamp? = nil
+    var _tags: [String] = []
 
     static let defaultInstance = _StorageClass()
 
@@ -146,6 +171,9 @@ extension Task: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase,
       _subtasks = source._subtasks
       _weight = source._weight
       _children = source._children
+      _description_p = source._description_p
+      _deadline = source._deadline
+      _tags = source._tags
     }
   }
 
@@ -168,6 +196,9 @@ extension Task: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase,
         case 5: try decoder.decodeSingularInt32Field(value: &_storage._subtasks)
         case 6: try decoder.decodeSingularDoubleField(value: &_storage._weight)
         case 7: try decoder.decodeRepeatedStringField(value: &_storage._children)
+        case 8: try decoder.decodeSingularStringField(value: &_storage._description_p)
+        case 9: try decoder.decodeSingularMessageField(value: &_storage._deadline)
+        case 10: try decoder.decodeRepeatedStringField(value: &_storage._tags)
         default: break
         }
       }
@@ -197,6 +228,15 @@ extension Task: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase,
       if !_storage._children.isEmpty {
         try visitor.visitRepeatedStringField(value: _storage._children, fieldNumber: 7)
       }
+      if !_storage._description_p.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._description_p, fieldNumber: 8)
+      }
+      if let v = _storage._deadline {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 9)
+      }
+      if !_storage._tags.isEmpty {
+        try visitor.visitRepeatedStringField(value: _storage._tags, fieldNumber: 10)
+      }
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -213,6 +253,9 @@ extension Task: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase,
         if _storage._subtasks != rhs_storage._subtasks {return false}
         if _storage._weight != rhs_storage._weight {return false}
         if _storage._children != rhs_storage._children {return false}
+        if _storage._description_p != rhs_storage._description_p {return false}
+        if _storage._deadline != rhs_storage._deadline {return false}
+        if _storage._tags != rhs_storage._tags {return false}
         return true
       }
       if !storagesAreEqual {return false}

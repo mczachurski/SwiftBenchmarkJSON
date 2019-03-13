@@ -11,5 +11,8 @@ namespace NetCore
         public int Subtasks { get; set; }
         public double Weight { get; set; }
         public String[] Children { get; set; }
+        public String Description { get; set; }
+        public DateTime Deadline { get; set; }
+        public String[] Tags { get; set; }
     }
 }

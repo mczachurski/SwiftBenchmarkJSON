@@ -10,6 +10,9 @@ class TaskClassDto: Encodable, Decodable {
     public var subtasks: Int
     public var weight: Double
     public var children: [String]?
+    public var description: String?
+    public var deadline: Date?
+    public var tags: [String]?
 
     required init() {
         self.id = nil
@@ -19,9 +22,23 @@ class TaskClassDto: Encodable, Decodable {
         self.subtasks = 0
         self.weight = 1.0
         self.children = nil
+        self.description = ""
+        self.deadline = nil
+        self.tags = nil
     }
 
-    init(id: String, createDate: Date, name: String, isFinished: Bool, subtasks: Int, weight: Double, children: [String]) {
+    init(
+        id: String,
+        createDate: Date,
+        name: String,
+        isFinished: Bool,
+        subtasks: Int,
+        weight: Double,
+        children: [String],
+        description: String?,
+        deadline: Date?,
+        tags: [String]?
+    ) {
         self.id = id
         self.createDate = createDate
         self.name = name
@@ -29,5 +46,8 @@ class TaskClassDto: Encodable, Decodable {
         self.subtasks = subtasks
         self.weight = weight
         self.children = children
+        self.description = description
+        self.deadline = deadline
+        self.tags = tags
     }
 }

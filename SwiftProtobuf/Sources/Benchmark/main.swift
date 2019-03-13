@@ -26,6 +26,9 @@ func getList() -> Tasks {
         task.subtasks = 212
         task.weight = 3.14
         task.children = ["taska", "taskb", "taskc"]
+        task.description_p = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eget sem erat. Quisque dictum tellus in feugiat facilisis. Vivamus porttitor vel arcu id cursus. Cras interdum massa ac rhoncus ornare. Sed quis massa felis. Curabitur blandit tempor enim, vitae euismod nibh tincidunt a. Duis faucibus dapibus purus nec dictum. Suspendisse dignissim sapien et consequat lobortis."
+        task.deadline = SwiftProtobuf.Google_Protobuf_Timestamp(date: Date())
+        task.tags = ["tag1", "tag2", "tag3", "tag4", "tag5"]
 
         tasks.tasks.append(task)
     }
@@ -43,6 +46,9 @@ func getObject() -> Task {
     task.subtasks = 212
     task.weight = 3.14
     task.children = ["taska", "taskb", "taskc"]
+    task.description_p = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eget sem erat. Quisque dictum tellus in feugiat facilisis. Vivamus porttitor vel arcu id cursus. Cras interdum massa ac rhoncus ornare. Sed quis massa felis. Curabitur blandit tempor enim, vitae euismod nibh tincidunt a. Duis faucibus dapibus purus nec dictum. Suspendisse dignissim sapien et consequat lobortis."
+    task.deadline = SwiftProtobuf.Google_Protobuf_Timestamp(date: Date())
+    task.tags = ["tag1", "tag2", "tag3", "tag4", "tag5"]
 
     return task
 }
@@ -52,6 +58,7 @@ var list = getList()
 
 var objectJson = try! object.jsonString()
 var listJson = try! list.jsonString()
+
 var objectData = try! object.serializedData()
 var listData = try! list.serializedData()
 
