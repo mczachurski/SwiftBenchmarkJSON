@@ -68,7 +68,12 @@ TaskClassDto(
     subtasks: 212,
     weight: 3.14,
     children: ["taska", "taskb", "taskc"],
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eget sem erat. Quisque dictum tellus in feugiat facilisis. Vivamus porttitor vel arcu id cursus. Cras interdum massa ac rhoncus ornare. Sed quis massa felis. Curabitur blandit tempor enim, vitae euismod nibh tincidunt a. Duis faucibus dapibus purus nec dictum. Suspendisse dignissim sapien et consequat lobortis.",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+        Aenean eget sem erat. Quisque dictum tellus in feugiat facilisis. 
+        Vivamus porttitor vel arcu id cursus. Cras interdum massa ac rhoncus 
+        ornare. Sed quis massa felis. Curabitur blandit tempor enim, vitae 
+        euismod nibh tincidunt a. Duis faucibus dapibus purus nec dictum. 
+        Suspendisse dignissim sapien et consequat lobortis.",
     deadline: Date(),
     tags: ["tag1", "tag2", "tag3", "tag4", "tag5"]
 )
